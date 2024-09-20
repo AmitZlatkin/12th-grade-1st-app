@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1031253114775",
+    "project_id": "grade-12-app-1",
+    "storage_bucket": "grade-12-app-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031253114775:android:8a890e1974649cfdba0ed2",
+        "android_client_info": {
+          "package_name": "com.example.grade_12_app_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDA7pLIAxsdaqlUP6b1SB23Udx1yFhLqfs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
