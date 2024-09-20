@@ -27,40 +27,48 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
     }
 
-    public void onSave(View view) {
-        String name = ((EditText)findViewById(R.id.editDog)).getText().toString();
-        String color = ((EditText)findViewById(R.id.editColor)).getText().toString();
+    public void Save(View view) {
+        String dogName = ((EditText)findViewById(R.id.editDogName)).getText().toString();
+        String dogColor = ((EditText)findViewById(R.id.editDogColor)).getText().toString();
 
-        if (name.equals("") || color.equals(""))
-        {
+        if (dogName.isEmpty() || dogColor.isEmpty()) {
             SetStatus("Please type dog's name + color");
         }
-        Map<String, Object> dbData;
 
-        dbData = new HashMap<>();
-        dbData.put("DogName", name);
-        dbData.put("DogColor", color);
-        AddNew("Dogs", dbData);
+        Map<String, Object> dbNewData = new HashMap<>();
+        dbNewData.put("DogName", dogName);
+        dbNewData.put("DogColor", dogColor);
 
+        AddNewDocument("Dogs", dbNewData);
     }
 
-    private void AddNew(String collection, Map<String, Object> data) {
+    private void AddNewDocument(String collection, Map<String, Object> newData) {
+
+        /*
+         * How the function works:
+         *     Take the relevant collection (db.collection(collection).
+         *     Add the new data.
+         *     Add an OnSuccess listener which prints success message.
+         *     Add an OnFailure listener which prints failure message.
+        */
+
         db.collection(collection)
-                .add(data)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {                    @Override
+            .add(newData)
+            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
                 public void onSuccess(DocumentReference documentReference) {
                     SetStatus("DocumentSnapshot successfully written!");
                 }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        SetStatus( "Error writing document"+e.getMessage());
-                    }
-                });
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    SetStatus( "Error writing document"+e.getMessage());
+                }
+            });
     }
 
     private void SetStatus(String s) {
-        ((TextView)findViewById(R.id.textStatus)).setText(s);
+        ((TextView)findViewById(R.id.statusTextView)).setText(s);
     }
 }
