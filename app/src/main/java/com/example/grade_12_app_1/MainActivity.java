@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         /*
          * How the function works:
-         *     Take the relevant collection (db.collection(collection).
+         *     Take the relevant collection - db.collection(collection)
          *     Add the new data.
          *     Add an OnSuccess listener which prints success message.
          *     Add an OnFailure listener which prints failure message.
