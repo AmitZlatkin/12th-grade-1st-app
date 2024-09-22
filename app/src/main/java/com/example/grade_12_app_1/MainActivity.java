@@ -3,6 +3,7 @@ package com.example.grade_12_app_1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -70,5 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void SetStatus(String s) {
         ((TextView)findViewById(R.id.statusTextView)).setText(s);
+    }
+
+    public void GoToList(View view) {
+        Intent i = new Intent(this, ListActivity.class);
+        startActivity(i);
     }
 }
