@@ -1,6 +1,9 @@
 package com.example.grade_12_app_1;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,11 +35,27 @@ public class ListActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         lvDogs = findViewById(R.id.lvDogs);
+
+        InitListListener();
         GetFromDataSet();
     }
 
     private void SetStatus(String s) {
         ((TextView)findViewById(R.id.tvStatus)).setText(s);
+    }
+
+    private void InitListListener(){
+        SetStatus("List Listener");
+        lvDogs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String dog = lvDogs.getItemAtPosition(position).toString();
+                String name = dog.split("\n")[0];
+                Intent i = new Intent(getApplicationContext(), DetailsActivity.class);
+                i.putExtra("DogName", name);
+                startActivity(i);
+            }
+        });
     }
 
 
