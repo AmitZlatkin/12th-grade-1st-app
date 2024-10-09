@@ -157,4 +157,9 @@ public class MainActivity extends AppCompatActivity {
         activityResultLauncher.launch(iCamera);
 
     }
+
+    public void MoveToLogin(View view) {
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+    }
 }
