@@ -51,18 +51,18 @@ public class DetailsActivity extends AppCompatActivity {
     private void BuildQuery(String dogName) {
         SetStatus("Reading Firebase:");
         db.collection("Dogs")
-                .whereEqualTo("DogName",dogName)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (!task.isSuccessful()) {
-                            SetStatus("Error: " + task.getException());
-                            return;
-                        }
-                        GetDogDetails(task);
+            .whereEqualTo("DogName",dogName)
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (!task.isSuccessful()) {
+                        SetStatus("Error: " + task.getException());
+                        return;
                     }
-                });
+                    GetDogDetails(task);
+                }
+            });
     }
 
 
@@ -95,7 +95,7 @@ public class DetailsActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        Bitmap bm = null;
+        Bitmap bm;
         try {
             URL aURL = new URL(url);
             URLConnection conn = aURL.openConnection();

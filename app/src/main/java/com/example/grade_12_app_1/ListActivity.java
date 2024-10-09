@@ -63,19 +63,19 @@ public class ListActivity extends AppCompatActivity {
     {
         SetStatus("Reading Firebase:");
         db.collection("Dogs")
-                //.whereEqualTo("DogColor", "Blue")
-                //.orderBy("DogName")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (!task.isSuccessful()) {
-                            SetStatus("Error: " + task.getException());
-                            return;
-                        }
-                        DataToAdapter(task);
+            //.whereEqualTo("DogColor", "Blue")
+            //.orderBy("DogName")
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (!task.isSuccessful()) {
+                        SetStatus("Error: " + task.getException());
+                        return;
                     }
-                });
+                    DataToAdapter(task);
+                }
+            });
     }
     private void DataToAdapter(Task<QuerySnapshot> task) {
         int cnt = 0;

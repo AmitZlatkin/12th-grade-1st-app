@@ -35,37 +35,37 @@ public class LoginActivity extends AppCompatActivity {
     private void BuildQuery(String dogName, String dogColor) {
         SetStatus("Reading Firebase:");
         db.collection("Dogs")
-                .whereEqualTo("DogName", dogName)
-                .whereEqualTo("DogColor", dogColor)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (!task.isSuccessful()) { // check success of task
-                            SetStatus("task failed");
-                            return;
-                        }
-
-                        for (QueryDocumentSnapshot document : task.getResult()) { //check cache
-                            if (document.getMetadata().isFromCache()) {
-                                SetStatus("The Data is from cache. sorry");
-                                return;
-                            }
-                        }
-
-                        if(task.getResult().isEmpty()) { //check that such user exists (in our case - such dog)
-                            SetStatus("no dog found");
-                            return;
-                        }
-
-                        //go to details (I choose so)
-                        //theoretically we can add the collection of users and then send them to the list
-                        SetStatus("task succeeded");
-                        Intent i = new Intent(getApplicationContext(), DetailsActivity.class);
-                        i.putExtra("DogName", dogName);
-                        startActivity(i);
+            .whereEqualTo("DogName", dogName)
+            .whereEqualTo("DogColor", dogColor)
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (!task.isSuccessful()) { // check success of task
+                        SetStatus("task failed");
+                        return;
                     }
-                });
+
+                    for (QueryDocumentSnapshot document : task.getResult()) { //check cache
+                        if (document.getMetadata().isFromCache()) {
+                            SetStatus("The Data is from cache. sorry");
+                            return;
+                        }
+                    }
+
+                    if(task.getResult().isEmpty()) { //check that such user exists (in our case - such dog)
+                        SetStatus("no dog found");
+                        return;
+                    }
+
+                    //go to details (I choose so)
+                    //theoretically we can add the collection of users and then send them to the list
+                    SetStatus("task succeeded");
+                    Intent i = new Intent(getApplicationContext(), DetailsActivity.class);
+                    i.putExtra("DogName", dogName);
+                    startActivity(i);
+                }
+            });
     }
 
     private void SetStatus(String s) {
